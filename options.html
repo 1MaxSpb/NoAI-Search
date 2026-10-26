@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>NoAI Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="ui.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <header class="hero big">
+    <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+      <rect width="64" height="64" rx="16" fill="rgba(255,255,255,.2)"/>
+      <path d="M32 11c1.8 10.6 6.4 15.2 17 17-10.6 1.8-15.2 6.4-17 17-1.8-10.6-6.4-15.2-17-17 10.6-1.8 15.2-6.4 17-17z" fill="#fff"/>
+      <path d="M12 52L52 12" stroke="#ff3b5c" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+    <div class="grow">
+      <h1>NoAI Search</h1>
+      <p data-i18n="tagline"></p>
+    </div>
+    <div class="seg on-hero" data-key="lang" role="group" aria-label="Language">
+      <button data-val="auto" data-i18n="langAuto"></button>
+      <button data-val="ru">RU</button>
+      <button data-val="en">EN</button>
+    </div>
+    <label class="switch"><input type="checkbox" data-key="enabled" aria-label="NoAI Search"><span></span></label>
+  </header>
+
+  <main class="page">
+    <div class="col">
+
+      <section class="card">
+        <h2 data-i18n="behavior"></h2>
+        <div class="modes" data-key="mode" role="radiogroup">
+          <button class="mode" data-val="hide">
+            <b data-i18n="modeHide"></b><small data-i18n="modeHideDesc"></small>
+          </button>
+          <button class="mode" data-val="collapse">
+            <b data-i18n="modeCollapse"></b><small data-i18n="modeCollapseDesc"></small>
+          </button>
+          <button class="mode" data-val="blur">
+            <b data-i18n="modeBlur"></b><small data-i18n="modeBlurDesc"></small>
+          </button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 data-i18n="sites"></h2>
+        <h3 class="site"><i class="dot g"></i><span data-i18n="google"></span></h3>
+        <div class="row"><div class="txt"><div class="ttl" data-i18n="gOverview"></div><div class="dsc" data-i18n="gOverviewDesc"></div></div>
+          <label class="switch"><input type="checkbox" data-key="gOverview"><span></span></label></div>
+        <div class="row"><div class="txt"><div class="ttl" data-i18n="gAiMode"></div><div class="dsc" data-i18n="gAiModeDesc"></div></div>
+          <label class="switch"><input type="checkbox" data-key="gAiMode"><span></span></label></div>
+        <div class="row"><div class="txt"><div class="ttl" data-i18n="gForceWeb"></div><div class="dsc" data-i18n="gForceWebDesc"></div></div>
+          <label class="switch"><input type="checkbox" data-key="gForceWeb"><span></span></label></div>
+
+        <h3 class="site"><i class="dot y"></i><span data-i18n="yandex"></span></h3>
+        <div class="row"><div class="txt"><div class="ttl" data-i18n="yAnswer"></div><div class="dsc" data-i18n="yAnswerDesc"></div></div>
+          <label class="switch"><input type="checkbox" data-key="yAnswer"><span></span></label></div>
+        <div class="row"><div class="txt"><div class="ttl" data-i18n="yTab"></div><div class="dsc" data-i18n="yTabDesc"></div></div>
+          <label class="switch"><input type="checkbox" data-key="yTab"><span></span></label></div>
+      </section>
+
+      <section class="card">
+        <h2 data-i18n="custom"></h2>
+        <p class="hint" data-i18n="customDesc"></p>
+        <textarea id="custom" spellcheck="false" maxlength="4000" rows="5" data-i18n-ph="customPh"></textarea>
+        <p class="hint" id="customHint"></p>
+      </section>
+    </div>
+
+    <div class="col side">
+
+      <section class="card">
+        <h2 data-i18n="preview"></h2>
+        <div class="mock" id="mock">
+          <div class="mock-ai" id="mockAi">
+            <div class="mock-h"><span class="sp">✦</span><b data-i18n="gOverview"></b></div>
+            <i style="width:96%"></i><i style="width:88%"></i><i style="width:64%"></i>
+          </div>
+          <div class="mock-ph" id="mockPh">
+            <span class="sp">✦</span><span class="t" data-i18n="phOverview"></span><u data-i18n="show"></u>
+          </div>
+          <div class="mock-res"><b></b><i style="width:90%"></i><i style="width:70%"></i></div>
+          <div class="mock-res"><b></b><i style="width:84%"></i></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 data-i18n="appearance"></h2>
+        <div class="row">
+          <div class="txt"><div class="ttl" data-i18n="theme"></div></div>
+          <div class="seg" data-key="theme" role="group">
+            <button data-val="auto" data-i18n="themeAuto"></button>
+            <button data-val="light" data-i18n="themeLight"></button>
+            <button data-val="dark" data-i18n="themeDark"></button>
+          </div>
+        </div>
+        <div class="row col-row">
+          <div class="txt"><div class="ttl" data-i18n="accent"></div></div>
+          <div class="swatches" id="swatches" role="group"></div>
+        </div>
+        <div class="row">
+          <div class="txt"><div class="ttl" data-i18n="showCounter"></div><div class="dsc" data-i18n="showCounterDesc"></div></div>
+          <label class="switch"><input type="checkbox" data-key="showCounter"><span></span></label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 data-i18n="data"></h2>
+        <div class="stats">
+          <div><b id="sTotal">0</b><span data-i18n="statsTotal"></span></div>
+          <div><b id="sG">0</b><span data-i18n="google"></span></div>
+          <div><b id="sY">0</b><span data-i18n="yandex"></span></div>
+        </div>
+        <div class="btns">
+          <button class="btn" id="export">⬇ <span data-i18n="export"></span></button>
+          <button class="btn" id="import">⬆ <span data-i18n="import"></span></button>
+          <button class="btn" id="resetStats" data-i18n="resetStats"></button>
+          <button class="btn danger" id="resetAll" data-i18n="resetAll"></button>
+        </div>
+        <input type="file" id="file" accept="application/json,.json" hidden>
+      </section>
+
+      <p class="hint foot-note" data-i18n="footer"></p>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="shared.js"></script>
+  <script src="ui.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

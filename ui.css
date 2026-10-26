@@ -1,0 +1,121 @@
+:root {
+  --bg: #f5f4fb; --card: #ffffff; --text: #1d1b2e; --muted: #6d6a82; --line: #e7e4f3;
+  --accent: #7c5cff;
+  --accent2: color-mix(in oklch, var(--accent) 62%, #ff4d8d);
+  --soft: color-mix(in srgb, var(--accent) 11%, transparent);
+  --shadow: 0 8px 28px rgba(50, 36, 110, .09);
+  --radius: 16px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14131c; --card: #1e1c2b; --text: #f1effc; --muted: #9e9bb6; --line: #2d2a41;
+    --shadow: 0 8px 28px rgba(0, 0, 0, .45); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14131c; --card: #1e1c2b; --text: #f1effc; --muted: #9e9bb6; --line: #2d2a41;
+  --shadow: 0 8px 28px rgba(0, 0, 0, .45); color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p { margin: 0; }
+button { font: inherit; color: inherit; }
+
+/* ---------- шапка ---------- */
+.hero {
+  display: flex; align-items: center; gap: 14px; padding: 18px 20px; color: #fff;
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(255, 255, 255, .22), transparent 55%),
+    linear-gradient(135deg, var(--accent), var(--accent2));
+}
+.hero .logo { width: 44px; height: 44px; flex: none; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .25)); }
+.hero h1 { font-size: 18px; letter-spacing: -.01em; }
+.hero p { opacity: .85; font-size: 12.5px; }
+.hero .grow { flex: 1; min-width: 0; }
+
+/* ---------- карточки ---------- */
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 16px 18px;
+}
+.card > h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
+
+/* ---------- строка с переключателем ---------- */
+.row { display: flex; align-items: center; gap: 14px; padding: 10px 0; }
+.row + .row { border-top: 1px solid var(--line); }
+.row .txt { flex: 1; min-width: 0; }
+.row .ttl { font-weight: 600; }
+.row .dsc { color: var(--muted); font-size: 12.5px; }
+
+/* ---------- переключатель ---------- */
+.switch { position: relative; display: inline-block; width: 44px; height: 26px; flex: none; cursor: pointer; }
+.switch input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.switch span {
+  position: absolute; inset: 0; border-radius: 999px; background: color-mix(in srgb, var(--muted) 35%, transparent);
+  transition: background .2s;
+}
+.switch span::after {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%;
+  background: #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, .3); transition: transform .22s cubic-bezier(.3, 1.4, .5, 1);
+}
+.switch input:checked + span { background: var(--accent); }
+.switch input:checked + span::after { transform: translateX(18px); }
+.switch input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.hero .switch input:checked + span { background: rgba(255, 255, 255, .95); }
+.hero .switch input:checked + span::after { background: var(--accent); }
+.hero .switch span { background: rgba(255, 255, 255, .35); }
+
+/* ---------- сегменты ---------- */
+.seg { display: inline-flex; padding: 3px; gap: 2px; border-radius: 12px; background: var(--soft); border: 1px solid var(--line); }
+.seg.full { display: flex; }
+.seg button {
+  all: unset; box-sizing: border-box; cursor: pointer; flex: 1; text-align: center; white-space: nowrap;
+  padding: 6px 12px; border-radius: 9px; font-size: 13px; font-weight: 600; color: var(--muted);
+  transition: background .18s, color .18s, box-shadow .18s;
+}
+.seg button:hover { color: var(--text); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: #fff; box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 45%, transparent); }
+.seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* ---------- чипы ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; cursor: pointer; }
+.chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.chip span {
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--card); font-size: 12.5px; font-weight: 600; color: var(--muted);
+  transition: all .18s;
+}
+.chip span::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: color-mix(in srgb, var(--muted) 45%, transparent); transition: background .18s, box-shadow .18s; }
+.chip input:checked + span { color: var(--text); border-color: var(--accent); background: var(--soft); }
+.chip input:checked + span::before { background: var(--accent); box-shadow: 0 0 0 3px var(--soft); }
+.chip input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- кнопки ---------- */
+.btn {
+  all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px 14px; border-radius: 11px; font-weight: 600; font-size: 13px;
+  border: 1px solid var(--line); background: var(--card); color: var(--text); transition: all .15s;
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: 0; }
+.btn.primary:hover { filter: brightness(1.08); color: #fff; }
+.btn.danger:hover { border-color: #e84118; color: #e84118; }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- toast ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 24px); opacity: 0; pointer-events: none;
+  padding: 9px 18px; border-radius: 999px; background: var(--text); color: var(--bg); font-weight: 600; font-size: 13px;
+  transition: opacity .2s, transform .25s cubic-bezier(.3, 1.4, .5, 1); z-index: 10;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+.hint { font-size: 12px; color: var(--muted); }
+.hint.bad { color: #e84118; }

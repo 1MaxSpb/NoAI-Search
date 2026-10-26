@@ -1,0 +1,74 @@
+/* Управляется атрибутами на <html>, которые ставит content.js:
+   data-noai, data-noai-mode (hide|collapse|blur), data-noai-flags (overview aimode answer yatab) */
+
+/* ---------- Вкладки и кнопки: всегда скрываются целиком ---------- */
+html[data-noai][data-noai-flags~="aimode"] [data-noai-kind="aimode"],
+html[data-noai][data-noai-flags~="aimode"] a[href*="udm=50"],
+html[data-noai][data-noai-flags~="aimode"] [role="listitem"]:has(a[href*="udm=50"]),
+html[data-noai][data-noai-flags~="yatab"] [data-noai-kind="yatab"],
+html[data-noai][data-noai-flags~="yatab"] .HeaderNav-Tab[href*="/alice"] {
+  display: none !important;
+}
+
+/* ---------- Блоки ответа: режим «скрыть» ---------- */
+html[data-noai][data-noai-mode="hide"][data-noai-flags~="overview"] [data-noai-kind="overview"],
+html[data-noai][data-noai-mode="hide"][data-noai-flags~="answer"] [data-noai-kind="answer"],
+/* ранняя защита от мигания, пока JS не успел пометить элемент */
+html[data-noai][data-noai-mode="hide"][data-noai-flags~="answer"] li.serp-item:has([class*="FuturisSearch"]) {
+  display: none !important;
+}
+
+/* ---------- режим «свернуть» ---------- */
+html[data-noai][data-noai-mode="collapse"][data-noai-flags~="overview"] [data-noai-kind="overview"]:not([data-noai-revealed]),
+html[data-noai][data-noai-mode="collapse"][data-noai-flags~="answer"] [data-noai-kind="answer"]:not([data-noai-revealed]) {
+  display: none !important;
+}
+
+/* ---------- режим «размыть» ---------- */
+html[data-noai][data-noai-mode="blur"][data-noai-flags~="overview"] [data-noai-kind="overview"],
+html[data-noai][data-noai-mode="blur"][data-noai-flags~="answer"] [data-noai-kind="answer"] {
+  filter: blur(9px) saturate(.6);
+  opacity: .7;
+  transition: filter .25s ease, opacity .25s ease;
+  user-select: none;
+}
+html[data-noai][data-noai-mode="blur"] [data-noai-kind]:is(:hover, [data-noai-revealed]) {
+  filter: none !important;
+  opacity: 1 !important;
+  user-select: auto;
+}
+
+/* ---------- плашка ---------- */
+.noai-ph { display: none; }
+
+html[data-noai][data-noai-mode="collapse"][data-noai-flags~="overview"] .noai-ph[data-kind="overview"],
+html[data-noai][data-noai-mode="collapse"][data-noai-flags~="answer"] .noai-ph[data-kind="answer"] {
+  display: flex;
+}
+
+.noai-ph {
+  --ph-bg: #f4f2fc; --ph-text: #4a4660; --ph-line: #e0dcf2;
+  align-items: center; gap: 10px;
+  box-sizing: border-box; max-width: 652px; margin: 8px 0 12px;
+  padding: 9px 14px;
+  background: var(--ph-bg); color: var(--ph-text);
+  border: 1px solid var(--ph-line);
+  border-left: 3px solid var(--noai-accent, #7c5cff);
+  border-radius: 10px;
+  font: 13px/1.3 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-noai-theme="light"]) .noai-ph { --ph-bg: #25232f; --ph-text: #cfcbe3; --ph-line: #38354a; }
+}
+html[data-noai-theme="dark"] .noai-ph { --ph-bg: #25232f; --ph-text: #cfcbe3; --ph-line: #38354a; }
+
+.noai-ph-i { color: var(--noai-accent, #7c5cff); font-size: 15px; }
+.noai-ph-t { flex: 1; }
+.noai-ph-b {
+  all: unset; cursor: pointer; padding: 3px 11px; border-radius: 999px;
+  color: var(--noai-accent, #7c5cff);
+  border: 1px solid var(--noai-accent, #7c5cff);
+  font-size: 12px; font-weight: 600;
+  transition: background .15s, color .15s;
+}
+.noai-ph-b:hover, .noai-ph-b:focus-visible { background: var(--noai-accent, #7c5cff); color: #fff; }

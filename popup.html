@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>NoAI Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="ui.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="hero">
+    <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+      <rect width="64" height="64" rx="16" fill="rgba(255,255,255,.2)"/>
+      <path d="M32 11c1.8 10.6 6.4 15.2 17 17-10.6 1.8-15.2 6.4-17 17-1.8-10.6-6.4-15.2-17-17 10.6-1.8 15.2-6.4 17-17z" fill="#fff"/>
+      <path d="M12 52L52 12" stroke="#ff3b5c" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+    <div class="grow">
+      <h1>NoAI Search</h1>
+      <p data-i18n="tagline"></p>
+    </div>
+    <label class="switch" data-i18n-title="on"><input type="checkbox" data-key="enabled" aria-label="NoAI Search"><span></span></label>
+  </header>
+
+  <main class="body">
+    <section class="stat" id="stat">
+      <div class="num" id="count">0</div>
+      <div class="lbl" data-i18n="hiddenCount"></div>
+      <div class="split"><span>Google <b id="cG">0</b></span><span id="yLbl"></span></div>
+    </section>
+
+    <section>
+      <h2 data-i18n="mode"></h2>
+      <div class="seg full" data-key="mode" role="group">
+        <button data-val="hide" data-i18n="modeHide"></button>
+        <button data-val="collapse" data-i18n="modeCollapse"></button>
+        <button data-val="blur" data-i18n="modeBlur"></button>
+      </div>
+    </section>
+
+    <section>
+      <h2 data-i18n="quick"></h2>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" data-key="gOverview"><span data-i18n="gOverview"></span></label>
+        <label class="chip"><input type="checkbox" data-key="gAiMode"><span data-i18n="gAiMode"></span></label>
+        <label class="chip"><input type="checkbox" data-key="gForceWeb"><span data-i18n="gForceWeb"></span></label>
+        <label class="chip"><input type="checkbox" data-key="yAnswer"><span data-i18n="yAnswer"></span></label>
+        <label class="chip"><input type="checkbox" data-key="yTab"><span data-i18n="yTab"></span></label>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="seg" data-key="lang" role="group" aria-label="Language">
+      <button data-val="auto" data-i18n="langAuto"></button>
+      <button data-val="ru">RU</button>
+      <button data-val="en">EN</button>
+    </div>
+    <button class="btn" id="open"><span data-i18n="openSettings"></span> →</button>
+  </footer>
+
+  <script src="shared.js"></script>
+  <script src="ui.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

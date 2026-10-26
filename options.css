@@ -1,0 +1,83 @@
+.hero.big { padding: 26px max(24px, calc((100% - 960px) / 2)); }
+.hero.big .logo { width: 56px; height: 56px; }
+.hero.big h1 { font-size: 24px; }
+.hero .seg.on-hero { background: rgba(255, 255, 255, .18); border-color: rgba(255, 255, 255, .25); }
+.hero .seg.on-hero button { color: rgba(255, 255, 255, .85); }
+.hero .seg.on-hero button[aria-pressed="true"] { background: #fff; color: var(--accent); box-shadow: 0 3px 10px rgba(0, 0, 0, .2); }
+
+.page { max-width: 960px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 1.25fr 1fr; gap: 20px; align-items: start; }
+.col { display: grid; gap: 20px; min-width: 0; }
+.side { position: sticky; top: 16px; }
+@media (max-width: 820px) { .page { grid-template-columns: 1fr; } .side { position: static; } }
+.is-off .page { opacity: .5; filter: grayscale(.7); transition: opacity .25s, filter .25s; }
+
+/* ---------- режимы ---------- */
+.modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.mode {
+  all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 4px; align-content: start; padding: 12px 12px 14px;
+  border: 1.5px solid var(--line); border-radius: 14px; background: var(--card); transition: all .18s;
+}
+.mode b { font-size: 14px; }
+.mode small { color: var(--muted); font-size: 12px; line-height: 1.35; }
+.mode:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); transform: translateY(-1px); }
+.mode[aria-pressed="true"] { border-color: var(--accent); background: var(--soft); box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 22%, transparent); }
+.mode:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 560px) { .modes { grid-template-columns: 1fr; } }
+
+/* ---------- сайты ---------- */
+.site { display: flex; align-items: center; gap: 8px; font-size: 14px; margin: 6px 0 0; }
+.site:not(:first-of-type) { margin-top: 16px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.dot.g { background: conic-gradient(#ea4335 0 25%, #fbbc05 0 50%, #34a853 0 75%, #4285f4 0); }
+.dot.y { background: #fc3f1d; }
+
+/* ---------- свои селекторы ---------- */
+textarea {
+  width: 100%; margin: 10px 0 6px; padding: 10px 12px; resize: vertical; min-height: 96px;
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--text); background: var(--bg); border: 1.5px solid var(--line); border-radius: 12px; transition: border-color .15s;
+}
+textarea:focus { outline: none; border-color: var(--accent); }
+
+/* ---------- цвет ---------- */
+.col-row { flex-wrap: wrap; }
+.swatches { display: flex; gap: 8px; align-items: center; }
+.sw {
+  all: unset; box-sizing: border-box; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; background: var(--c);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .5); transition: transform .15s, box-shadow .15s;
+}
+.sw:hover { transform: scale(1.15); }
+.sw[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--c); }
+.sw:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.swatches input[type="color"] { width: 28px; height: 28px; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; }
+
+/* ---------- данные ---------- */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+.stats div { background: var(--soft); border-radius: 12px; padding: 10px 12px; display: grid; }
+.stats b { font-size: 22px; letter-spacing: -.02em; }
+.stats span { font-size: 12px; color: var(--muted); }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.foot-note { text-align: center; }
+
+/* ---------- живой предпросмотр ---------- */
+.mock { display: grid; gap: 10px; padding: 14px; border-radius: 14px; background: var(--bg); border: 1px dashed var(--line); }
+.mock i { display: block; height: 7px; border-radius: 4px; background: color-mix(in srgb, var(--muted) 30%, transparent); margin-top: 6px; }
+.mock-ai {
+  padding: 12px; border-radius: 12px; background: var(--card); border: 1px solid var(--line);
+  border-left: 3px solid var(--accent); transition: filter .3s, opacity .3s;
+}
+.mock-h { display: flex; align-items: center; gap: 6px; font-size: 13px; margin-bottom: 4px; }
+.mock .sp { color: var(--accent); }
+.mock-ph { display: none; align-items: center; gap: 8px; padding: 8px 12px; font-size: 12.5px; border-radius: 10px; background: var(--soft); border: 1px solid var(--line); border-left: 3px solid var(--accent); }
+.mock-ph .t { flex: 1; color: var(--muted); }
+.mock-ph u { text-decoration: none; font-weight: 700; font-size: 12px; color: var(--accent); }
+.mock-res b { display: block; width: 55%; height: 10px; border-radius: 5px; background: var(--accent); opacity: .75; }
+
+.mock[data-state="hide"] .mock-ai { display: none; }
+.mock[data-state="collapse"] .mock-ai { display: none; }
+.mock[data-state="collapse"] .mock-ph { display: flex; }
+.mock[data-state="blur"] .mock-ai { filter: blur(5px); opacity: .7; }
+.mock[data-state="blur"]:hover .mock-ai { filter: none; opacity: 1; }
+
+.swatches input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+.swatches input[type="color"]::-webkit-color-swatch { border: 2px solid var(--line); border-radius: 50%; }

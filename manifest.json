@@ -1,0 +1,63 @@
+{
+  "manifest_version": 3,
+  "name": "NoAI Search",
+  "version": "2.0.0",
+  "description": "Скрывает ИИ-блоки в Google и Яндексе. Hides AI answers in Google and Yandex search.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_title": "NoAI Search",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.google.com/*",
+        "*://www.google.ru/*",
+        "*://www.google.es/*",
+        "*://www.google.de/*",
+        "*://www.google.fr/*",
+        "*://www.google.it/*",
+        "*://www.google.pl/*",
+        "*://www.google.nl/*",
+        "*://www.google.by/*",
+        "*://www.google.kz/*",
+        "*://www.google.com.ua/*",
+        "*://www.google.com.br/*",
+        "*://www.google.com.tr/*",
+        "*://www.google.co.uk/*",
+        "*://www.google.co.in/*",
+        "*://yandex.ru/*",
+        "*://yandex.com/*",
+        "*://yandex.by/*",
+        "*://yandex.kz/*",
+        "*://yandex.com.tr/*",
+        "*://ya.ru/*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "shared.js",
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}
